@@ -11,4 +11,8 @@ def create_app():
     )  # ensure you have a `config.py` file in the root folder
     db.init_app(app)
 
+    from app.routes.insights import insights_bp
+
+    app.register_blueprint(insights_bp, url_prefix="/insights")
+
     return app
