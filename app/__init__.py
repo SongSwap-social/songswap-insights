@@ -12,7 +12,9 @@ def create_app():
     db.init_app(app)
 
     from app.routes.insights import insights_bp
+    from app.routes.insights_global import insights_global_bp
 
     app.register_blueprint(insights_bp, url_prefix="/insights")
+    app.register_blueprint(insights_global_bp, url_prefix="/insights/global")
 
     return app
