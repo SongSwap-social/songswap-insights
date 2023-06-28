@@ -12,7 +12,6 @@ def get_top_tracks(limit: int = 10) -> dict:
         .group_by(History.track_id, Tracks.name, Artists.name)
         .order_by(db.func.count(History.track_id).desc())
         .limit(limit)
-        .all()
     )
 
     return [
@@ -35,7 +34,6 @@ def get_top_artists(limit: int = 10) -> dict:
         .group_by(Artists.name)
         .order_by(db.func.count(History.track_id).desc())
         .limit(limit)
-        .all()
     )
 
     return [
@@ -51,7 +49,6 @@ def get_top_primary_artists(limit: int = 10) -> dict:
         .group_by(Artists.name)
         .order_by(db.func.count(ArtistTracks.track_id).desc())
         .limit(limit)
-        .all()
     )
 
     return [
@@ -65,7 +62,6 @@ def get_top_listeners(limit: int = 10) -> dict:
         .group_by(History.user_id)
         .order_by(db.func.count(History.user_id).desc())
         .limit(limit)
-        .all()
     )
 
     return [{"user_id": user_id, "count": count} for user_id, count in result]
