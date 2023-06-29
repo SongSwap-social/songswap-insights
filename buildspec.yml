@@ -22,15 +22,9 @@ phases:
           echo Pushing image to Amazon ECR...
           docker push $REPOSITORY_URI:latest
           docker push $REPOSITORY_URI:$TAG
-          echo Generating the Dockerrun file...
-          sed -i='' "s/<AWS_ACCOUNT_ID>/${AWS_ACCOUNT_ID}/g" Dockerrun.aws.json
-          sed -i='' "s/<AWS_REGION>/${AWS_REGION}/g" Dockerrun.aws.json
-          sed -i='' "s/<ECR_REPOSITORY>/${ECR_REPOSITORY}/g" Dockerrun.aws.json
         else
           echo Build failed. Not pushing image to Amazon ECR...
         fi
 artifacts:
-  files:
-    - Dockerrun.aws.json
   name: $(date +%Y-%m-%d)
   discard-paths: yes
